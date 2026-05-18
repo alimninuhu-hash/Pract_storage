@@ -29,7 +29,7 @@
         <DataGrid x:Name="ProductsGrid"
                   Grid.Row="1"
                   AutoGenerateColumns="True"
-                  Margin="5"/>
+                  Margin="5,5,0,0"/>
 
     </Grid>
 </Window>
