@@ -108,22 +108,36 @@
                     </ComboBox>
 
                     <!-- СОРТИРОВКА -->
-
                     <TextBlock Text="Сортировка"
-                               FontSize="16"
-                               FontWeight="SemiBold"
-                               Foreground="White"
-                               Margin="0,0,0,10"/>
+           FontSize="16"
+           FontWeight="SemiBold"
+           Foreground="White"
+           Margin="0,0,0,10"/>
 
-                    <Button Content="Сортировать по алфавиту"
-                            Height="45"
-                            FontSize="15"
-                            FontWeight="SemiBold"
-                            Background="#374151"
-                            Foreground="White"
-                            BorderThickness="0"
-                            Click="Sort_Click"/>
+                    <ComboBox x:Name="SortBox"
+          Height="40"
+          FontSize="14"
+          SelectedIndex="0"
+          SelectionChanged="SortBox_SelectionChanged">
 
+                        <ComboBoxItem Content="Без сортировки"/>
+
+                        <ComboBoxItem Content="Название ↑"/>
+                        <ComboBoxItem Content="Название ↓"/>
+
+                        <ComboBoxItem Content="Количество ↑"/>
+                        <ComboBoxItem Content="Количество ↓"/>
+
+                        <ComboBoxItem Content="Цена ↑"/>
+                        <ComboBoxItem Content="Цена ↓"/>
+
+                        <ComboBoxItem Content="Дата ↑"/>
+                        <ComboBoxItem Content="Дата ↓"/>
+
+                        <ComboBoxItem Content="Категория ↑"/>
+                        <ComboBoxItem Content="Категория ↓"/>
+
+                    </ComboBox>
                 </StackPanel>
 
                 <!-- ВЫХОД -->

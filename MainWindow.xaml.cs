@@ -220,10 +220,75 @@ namespace WarehouseInventory
 
         // СОРТИРОВКА
 
-        private void Sort_Click(object sender, RoutedEventArgs e)
+        private void SortBox_SelectionChanged(
+    object sender,
+    SelectionChangedEventArgs e)
         {
-            table.DefaultView.Sort =
-                "Name ASC";
+            if (SortBox.SelectedItem is ComboBoxItem item)
+            {
+                string sort =
+                    item.Content.ToString();
+
+                switch (sort)
+                {
+                    case "Без сортировки":
+                        table.DefaultView.Sort = "";
+                        break;
+
+
+                    case "Название ↑":
+                        table.DefaultView.Sort =
+                            "Name DESC";
+                        break;
+
+                    case "Название ↓":
+                        table.DefaultView.Sort =
+                            "Name ASC";
+                        break;
+
+
+                    case "Количество ↑":
+                        table.DefaultView.Sort =
+                            "Quantity DESC";
+                        break;
+
+                    case "Количество ↓":
+                        table.DefaultView.Sort =
+                            "Quantity ASC";
+                        break;
+
+                    case "Цена ↑":
+                        table.DefaultView.Sort =
+                            "Price DESC";
+                        break;
+
+                    case "Цена ↓":
+                        table.DefaultView.Sort =
+                            "Price ASC";
+                        break;
+
+                    case "Дата ↑":
+                        table.DefaultView.Sort =
+                            "DeliveryDate DESC";
+                        break;
+
+                    case "Дата ↓":
+                        table.DefaultView.Sort =
+                            "DeliveryDate ASC";
+                        break;
+
+
+                    case "Категория ↑":
+                        table.DefaultView.Sort =
+                            "Category DESC";
+                        break;
+
+                    case "Категория ↓":
+                        table.DefaultView.Sort =
+                            "Category ASC";
+                        break;
+                }
+            }
         }
 
         // ВЫХОД
