@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
@@ -93,21 +94,96 @@ namespace WarehouseInventory
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            AddEditWindow window =
+                new AddEditWindow();
 
+            if (window.ShowDialog() == true)
+            {
+                LoadProducts();
+            }
         }
 
         // РЕДАКТИРОВАНИЕ
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            if (ProductsGrid.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Выберите товар");
 
+                return;
+            }
+
+            DataRowView row =
+                (DataRowView)ProductsGrid.SelectedItem;
+
+            AddEditWindow window =
+                new AddEditWindow();
+
+            window.ProductId =
+                Convert.ToInt32(row["Id"]);
+
+            window.NameBox.Text =
+                row["Name"].ToString();
+
+            window.CategoryBox.Text =
+                row["Category"].ToString();
+
+            window.QuantityBox.Text =
+                row["Quantity"].ToString();
+
+            window.PriceBox.Text =
+                row["Price"].ToString();
+
+            window.SupplierBox.Text =
+                row["Supplier"].ToString();
+
+            window.DeliveryDatePicker.SelectedDate =
+                Convert.ToDateTime(row["DeliveryDate"]);
+
+            if (window.ShowDialog() == true)
+            {
+                LoadProducts();
+            }
         }
 
         // УДАЛЕНИЕ
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            if (ProductsGrid.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Выберите товар");
 
+                return;
+            }
+
+            DataRowView row =
+                (DataRowView)ProductsGrid.SelectedItem;
+
+            int id =
+                Convert.ToInt32(row["Id"]);
+
+            using (SqlConnection connection =
+                   new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query =
+                    "DELETE FROM Product WHERE Id = @Id";
+
+                SqlCommand command =
+                    new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue(
+                    "@Id", id);
+
+                command.ExecuteNonQuery();
+            }
+
+            LoadProducts();
         }
 
         // ПОИСК
