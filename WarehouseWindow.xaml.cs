@@ -59,5 +59,13 @@ namespace WarehouseInventory
                 }
             }
         }
+
+        private void OpenRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow window =
+       new RegisterWindow();
+
+            window.ShowDialog();
+        }
     }
 }
