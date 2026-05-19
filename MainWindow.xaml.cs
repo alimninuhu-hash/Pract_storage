@@ -189,33 +189,53 @@ namespace WarehouseInventory
         // ПОИСК
 
         private void SearchBox_TextChanged(
-            object sender,
-            TextChangedEventArgs e)
+      object sender,
+      TextChangedEventArgs e)
         {
-            table.DefaultView.RowFilter =
-                $"Name LIKE '%{SearchBox.Text}%'";
+            ApplyFilters();
         }
-
         // ФИЛЬТР
 
-        private void CategoryFilterBox_SelectionChanged(
-            object sender,
-            SelectionChangedEventArgs e)
+        private void ApplyFilters()
         {
-            if (CategoryFilterBox.SelectedItem is ComboBoxItem item)
-            {
-                string category = item.Content.ToString();
+            string filter = "";
 
-                if (category == "Все категории")
+            // ПОИСК
+
+            if (!string.IsNullOrWhiteSpace(SearchBox.Text))
+            {
+                string search =
+                    SearchBox.Text
+                    .Replace("'", "''");
+
+                filter =
+                    $"Name LIKE '%{search}%'";
+            }
+
+            // КАТЕГОРИЯ
+
+            if (CategoryFilterBox.SelectedItem
+                is ComboBoxItem item)
+            {
+                string category =
+                    item.Content.ToString();
+
+                if (category != "Все категории")
                 {
-                    table.DefaultView.RowFilter = "";
-                }
-                else
-                {
-                    table.DefaultView.RowFilter =
+                    if (!string.IsNullOrEmpty(filter))
+                    {
+                        filter += " AND ";
+                    }
+
+                    category =
+                        category.Replace("'", "''");
+
+                    filter +=
                         $"Category = '{category}'";
                 }
             }
+
+            table.DefaultView.RowFilter = filter;
         }
 
         // СОРТИРОВКА
@@ -296,6 +316,13 @@ namespace WarehouseInventory
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void CategoryFilterBox_SelectionChanged(
+     object sender,
+     SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
         }
     }
 }

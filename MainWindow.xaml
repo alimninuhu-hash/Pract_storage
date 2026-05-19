@@ -94,16 +94,19 @@
                                FontWeight="SemiBold"
                                Foreground="White"
                                Margin="0,0,0,10"/>
-
                     <ComboBox x:Name="CategoryFilterBox"
-                              Height="40"
-                              Margin="0,0,0,25"
-                              FontSize="14"
-                              SelectionChanged="CategoryFilterBox_SelectionChanged">
+          Height="40"
+          Margin="0,0,0,25"
+          FontSize="14"
+          SelectedIndex="0"
+          SelectionChanged="CategoryFilterBox_SelectionChanged">
 
                         <ComboBoxItem Content="Все категории"/>
+
                         <ComboBoxItem Content="Техника"/>
                         <ComboBoxItem Content="Канцтовары"/>
+                        <ComboBoxItem Content="Мебель"/>
+                        <ComboBoxItem Content="Продукты"/>
 
                     </ComboBox>
 
@@ -237,7 +240,7 @@
 
                     <StackPanel>
 
-                        <TextBlock Text="Стоимость склада"
+                        <TextBlock Text="Стоимость всех товаров"
                                    FontSize="16"
                                    Foreground="#6B7280"/>
 

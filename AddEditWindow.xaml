@@ -30,9 +30,16 @@
 
                 <TextBlock Text="Категория"/>
 
-                <TextBox x:Name="CategoryBox"
-                         Height="40"
-                         Margin="0,5,0,15"/>
+                <ComboBox x:Name="CategoryBox"
+          Height="40"
+          Margin="0,5,0,15">
+
+                    <ComboBoxItem Content="Техника"/>
+                    <ComboBoxItem Content="Канцтовары"/>
+                    <ComboBoxItem Content="Мебель"/>
+                    <ComboBoxItem Content="Продукты"/>
+
+                </ComboBox>
 
                 <TextBlock Text="Количество"/>
 
